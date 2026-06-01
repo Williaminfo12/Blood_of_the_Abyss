@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://doym3t0m7l2ka"]
+
+[ext_resource type="Script" path="res://monster.gd" id="1_monster"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_monster"]
+size = Vector2(34, 34)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_monster"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:hp")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:max_hp")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:monster_name")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:level")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[node name="Monster" type="CharacterBody2D"]
+script = ExtResource("1_monster")
+
+[node name="Body" type="ColorRect" parent="."]
+mouse_filter = 2
+offset_left = -17.0
+offset_top = -17.0
+offset_right = 17.0
+offset_bottom = 17.0
+color = Color(0.18, 0.55, 0.28, 1)
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -58.0
+offset_top = -54.0
+offset_right = 58.0
+offset_bottom = -18.0
+text = "沉淵爬行者 Lv.1\n45/45"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_monster")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_monster")

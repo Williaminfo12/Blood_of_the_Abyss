@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmi5a3p04hkp2"]
+
+[ext_resource type="Script" uid="uid://b86wjjh82p1pf" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
+size = Vector2(40, 40)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_position"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hp"]
+properties/0/path = NodePath(".:hp")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:max_hp")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:class_id")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:role_name")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:ability_name")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:level")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:experience")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:xp_to_next")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("ColorRect:color")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D" unique_id=1920662377]
+modulate = Color(0.003921569, 0.18039216, 1, 1)
+script = ExtResource("1_4flbx")
+
+[node name="AttackArea" type="ColorRect" parent="."]
+visible = false
+mouse_filter = 2
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+color = Color(0.78, 0.08, 0.1, 0.18)
+
+[node name="HPLabel" type="Label" parent="." unique_id=103266898]
+offset_left = -34.0
+offset_top = -50.0
+offset_right = 74.0
+offset_bottom = -27.0
+text = "生命 100/100"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1731792412]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08235294, 0.08627451, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=3120104721]
+shape = SubResource("RectangleShape2D_player")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+zoom = Vector2(1.2, 1.2)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1941294507]
+replication_config = SubResource("SceneReplicationConfig_position")
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1923018452]
+replication_config = SubResource("SceneReplicationConfig_hp")

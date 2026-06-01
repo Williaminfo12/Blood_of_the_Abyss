@@ -1,0 +1,93 @@
+{
+  "base_items": [
+    {
+      "id": "wpn_001",
+      "name": "鏽蝕鐵劍",
+      "type": "weapon",
+      "base_atk": 10
+    },
+    {
+      "id": "wpn_002",
+      "name": "裂刃短刀",
+      "type": "weapon",
+      "base_atk": 8
+    },
+    {
+      "id": "arm_001",
+      "name": "破爛皮甲",
+      "type": "armor",
+      "base_def": 5
+    },
+    {
+      "id": "arm_002",
+      "name": "鹽蝕鎖甲",
+      "type": "armor",
+      "base_def": 9
+    },
+    {
+      "id": "acc_001",
+      "name": "發霉布鞋",
+      "type": "shoes",
+      "base_spd": 2
+    },
+    {
+      "id": "acc_002",
+      "name": "殘月戒指",
+      "type": "ring",
+      "base_spd": 0
+    }
+  ],
+  "affix_pools": {
+    "attack": [
+      {
+        "id": "atk_01",
+        "desc": "+5 物理攻擊",
+        "weight": 50
+      },
+      {
+        "id": "atk_02",
+        "desc": "+5% 攻擊速度",
+        "weight": 30
+      },
+      {
+        "id": "atk_03",
+        "desc": "命中時有 5% 機率造成流血",
+        "weight": 10
+      }
+    ],
+    "defense": [
+      {
+        "id": "def_01",
+        "desc": "+20 最大生命",
+        "weight": 50
+      },
+      {
+        "id": "def_02",
+        "desc": "+2% 格擋機率",
+        "weight": 30
+      },
+      {
+        "id": "def_03",
+        "desc": "受到傷害 -5",
+        "weight": 20
+      }
+    ],
+    "utility": [
+      {
+        "id": "uti_01",
+        "desc": "3% 生命偷取",
+        "weight": 30
+      },
+      {
+        "id": "uti_02",
+        "desc": "受擊時 10% 機率擊退敵人",
+        "weight": 20
+      },
+      {
+        "id": "uti_leg",
+        "desc": "【傳奇】死亡時觸發大範圍毒爆",
+        "weight": 1
+      }
+    ]
+  }
+}

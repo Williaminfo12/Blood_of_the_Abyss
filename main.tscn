@@ -1,0 +1,405 @@
+[gd_scene load_steps=9 format=3 uid="uid://cs65qmy57b3u8"]
+
+[ext_resource type="Script" uid="uid://76cl5jn6jaxj" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cmi5a3p04hkp2" path="res://player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://hm17pew1lk3j" path="res://loot_drop.tscn" id="3_loot"]
+[ext_resource type="PackedScene" uid="uid://doym3t0m7l2ka" path="res://monster.tscn" id="4_monster"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_panel"]
+bg_color = Color(0.075, 0.052, 0.038, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.78, 0.56, 0.22, 1)
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_slot"]
+bg_color = Color(0.13, 0.095, 0.07, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.38, 0.26, 0.12, 1)
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_button"]
+bg_color = Color(0.22, 0.075, 0.055, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.86, 0.62, 0.25, 1)
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_button_hover"]
+bg_color = Color(0.35, 0.11, 0.07, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.78, 0.34, 1)
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+
+[node name="Main" type="Node2D" unique_id=592126415]
+script = ExtResource("1_ig7tw")
+
+[node name="ArenaFloor" type="ColorRect" parent="."]
+mouse_filter = 2
+offset_left = -1200.0
+offset_top = -800.0
+offset_right = 1200.0
+offset_bottom = 800.0
+color = Color(0.055, 0.052, 0.062, 1)
+
+[node name="ArenaCenterLineH" type="ColorRect" parent="."]
+mouse_filter = 2
+offset_left = -1200.0
+offset_top = -2.0
+offset_right = 1200.0
+offset_bottom = 2.0
+color = Color(0.24, 0.055, 0.04, 1)
+
+[node name="ArenaCenterLineV" type="ColorRect" parent="."]
+mouse_filter = 2
+offset_left = -2.0
+offset_top = -800.0
+offset_right = 2.0
+offset_bottom = 800.0
+color = Color(0.24, 0.055, 0.04, 1)
+
+[node name="NorthMarker" type="Label" parent="."]
+offset_left = -86.0
+offset_top = -360.0
+offset_right = 86.0
+offset_bottom = -334.0
+theme_override_colors/font_color = Color(0.86, 0.67, 0.32, 1)
+text = "深淵試煉場"
+horizontal_alignment = 1
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=211616414]
+_spawnable_scenes = PackedStringArray("uid://cmi5a3p04hkp2")
+spawn_path = NodePath("..")
+
+[node name="LootSpawner" type="MultiplayerSpawner" parent="." unique_id=3613877488]
+_spawnable_scenes = PackedStringArray("uid://hm17pew1lk3j")
+spawn_path = NodePath("..")
+
+[node name="MonsterSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://doym3t0m7l2ka")
+spawn_path = NodePath("..")
+
+[node name="MonsterTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -142.0
+offset_right = 230.0
+offset_bottom = 142.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_panel")
+
+[node name="MenuVBox" type="VBoxContainer" parent="CanvasLayer/MainMenu"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/MainMenu/MenuVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.78, 0.34, 1)
+theme_override_font_sizes/font_size = 22
+text = "深淵之血"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="CanvasLayer/MainMenu/MenuVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.62, 0.45, 1)
+text = "中古像素戰鬥原型"
+horizontal_alignment = 1
+
+[node name="ClassHint" type="Label" parent="CanvasLayer/MainMenu/MenuVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.82, 0.6, 1)
+text = "目前型態：血誓騎士"
+horizontal_alignment = 1
+
+[node name="ClassRow" type="HBoxContainer" parent="CanvasLayer/MainMenu/MenuVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BloodKnightButton" type="Button" parent="CanvasLayer/MainMenu/MenuVBox/ClassRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBox_button")
+theme_override_styles/hover = SubResource("StyleBox_button_hover")
+theme_override_styles/pressed = SubResource("StyleBox_button_hover")
+text = "血誓騎士"
+
+[node name="AbyssHunterButton" type="Button" parent="CanvasLayer/MainMenu/MenuVBox/ClassRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBox_button")
+theme_override_styles/hover = SubResource("StyleBox_button_hover")
+theme_override_styles/pressed = SubResource("StyleBox_button_hover")
+text = "深淵獵手"
+
+[node name="BloodMageButton" type="Button" parent="CanvasLayer/MainMenu/MenuVBox/ClassRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBox_button")
+theme_override_styles/hover = SubResource("StyleBox_button_hover")
+theme_override_styles/pressed = SubResource("StyleBox_button_hover")
+text = "咒血術士"
+
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MenuVBox" unique_id=1132309051]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_button")
+theme_override_styles/hover = SubResource("StyleBox_button_hover")
+theme_override_styles/pressed = SubResource("StyleBox_button_hover")
+text = "建立主機"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MenuVBox" unique_id=374748186]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_button")
+theme_override_styles/hover = SubResource("StyleBox_button_hover")
+theme_override_styles/pressed = SubResource("StyleBox_button_hover")
+text = "加入遊戲"
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StatusPanel" type="PanelContainer" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 340.0
+offset_bottom = 172.0
+theme_override_styles/panel = SubResource("StyleBox_panel")
+
+[node name="StatusVBox" type="VBoxContainer" parent="CanvasLayer/HUD/StatusPanel"]
+layout_mode = 2
+
+[node name="ClassLabel" type="Label" parent="CanvasLayer/HUD/StatusPanel/StatusVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.83, 0.55, 1)
+text = "型態：血誓騎士"
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/HUD/StatusPanel/StatusVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.83, 0.55, 1)
+text = "等級：1　經驗：0 / 100"
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/HUD/StatusPanel/StatusVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.83, 0.55, 1)
+text = "生命：100 / 100"
+
+[node name="SkillHint" type="Label" parent="CanvasLayer/HUD/StatusPanel/StatusVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.83, 0.55, 1)
+text = "技能：血盾衝擊（Q）"
+
+[node name="PowerLabel" type="Label" parent="CanvasLayer/HUD/StatusPanel/StatusVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.83, 0.55, 1)
+text = "攻擊：24　術力：36"
+
+[node name="InventoryHint" type="Label" parent="CanvasLayer/HUD/StatusPanel/StatusVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.83, 0.55, 1)
+text = "背包：0 件（I）"
+
+[node name="ControlHint" type="Label" parent="CanvasLayer/HUD/StatusPanel/StatusVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.62, 0.45, 1)
+text = "方向鍵移動　空白鍵普攻"
+
+[node name="CharacterPanel" type="PanelContainer" parent="CanvasLayer/HUD"]
+layout_mode = 0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -372.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 390.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBox_panel")
+
+[node name="CharacterVBox" type="VBoxContainer" parent="CanvasLayer/HUD/CharacterPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CharacterTitle" type="Label" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.78, 0.34, 1)
+text = "角色裝備"
+horizontal_alignment = 1
+
+[node name="PaperDoll" type="Control" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox"]
+custom_minimum_size = Vector2(320, 132)
+layout_mode = 2
+
+[node name="Head" type="ColorRect" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/PaperDoll"]
+offset_left = 142.0
+offset_top = 8.0
+offset_right = 178.0
+offset_bottom = 40.0
+color = Color(0.77, 0.58, 0.42, 1)
+
+[node name="Torso" type="ColorRect" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/PaperDoll"]
+offset_left = 130.0
+offset_top = 42.0
+offset_right = 190.0
+offset_bottom = 88.0
+color = Color(0.55, 0.18, 0.16, 1)
+
+[node name="LeftArm" type="ColorRect" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/PaperDoll"]
+offset_left = 104.0
+offset_top = 46.0
+offset_right = 128.0
+offset_bottom = 82.0
+color = Color(0.42, 0.13, 0.12, 1)
+
+[node name="RightArm" type="ColorRect" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/PaperDoll"]
+offset_left = 192.0
+offset_top = 46.0
+offset_right = 216.0
+offset_bottom = 82.0
+color = Color(0.42, 0.13, 0.12, 1)
+
+[node name="Legs" type="ColorRect" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/PaperDoll"]
+offset_left = 136.0
+offset_top = 90.0
+offset_right = 184.0
+offset_bottom = 126.0
+color = Color(0.32, 0.1, 0.09, 1)
+
+[node name="WeaponPixel" type="ColorRect" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/PaperDoll"]
+visible = false
+offset_left = 224.0
+offset_top = 38.0
+offset_right = 236.0
+offset_bottom = 108.0
+color = Color(0.86, 0.86, 0.78, 1)
+
+[node name="ArmorPixel" type="ColorRect" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/PaperDoll"]
+visible = false
+offset_left = 132.0
+offset_top = 50.0
+offset_right = 188.0
+offset_bottom = 70.0
+color = Color(0.54, 0.52, 0.45, 1)
+
+[node name="RingPixel" type="ColorRect" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/PaperDoll"]
+visible = false
+offset_left = 214.0
+offset_top = 72.0
+offset_right = 222.0
+offset_bottom = 80.0
+color = Color(1, 0.78, 0.24, 1)
+
+[node name="EquipmentGrid" type="VBoxContainer" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="WeaponSlot" type="Label" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/EquipmentGrid"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_slot")
+theme_override_colors/font_color = Color(0.93, 0.84, 0.64, 1)
+text = "武器：未裝備"
+
+[node name="ArmorSlot" type="Label" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/EquipmentGrid"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_slot")
+theme_override_colors/font_color = Color(0.93, 0.84, 0.64, 1)
+text = "護甲：未裝備"
+
+[node name="ShoesSlot" type="Label" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/EquipmentGrid"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_slot")
+theme_override_colors/font_color = Color(0.93, 0.84, 0.64, 1)
+text = "靴子：未裝備"
+
+[node name="RingSlot" type="Label" parent="CanvasLayer/HUD/CharacterPanel/CharacterVBox/EquipmentGrid"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_slot")
+theme_override_colors/font_color = Color(0.93, 0.84, 0.64, 1)
+text = "戒指：未裝備"
+
+[node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer/HUD"]
+layout_mode = 0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -372.0
+offset_top = 404.0
+offset_right = -16.0
+offset_bottom = 690.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBox_panel")
+
+[node name="InventoryVBox" type="VBoxContainer" parent="CanvasLayer/HUD/InventoryPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="InventoryTitle" type="Label" parent="CanvasLayer/HUD/InventoryPanel/InventoryVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.78, 0.34, 1)
+text = "背包"
+horizontal_alignment = 1
+
+[node name="InventoryText" type="RichTextLabel" parent="CanvasLayer/HUD/InventoryPanel/InventoryVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.93, 0.84, 0.64, 1)
+text = "尚未拾取任何裝備。"
+fit_content = true
+scroll_active = true
+
+[node name="LogPanel" type="PanelContainer" parent="CanvasLayer/HUD"]
+layout_mode = 0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -154.0
+offset_right = -388.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBox_panel")
+
+[node name="LogLabel" type="Label" parent="CanvasLayer/HUD/LogPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.84, 0.64, 1)
+text = ""
+vertical_alignment = 2
